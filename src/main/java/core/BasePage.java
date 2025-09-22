@@ -35,7 +35,14 @@ public class BasePage {
     //Nếu như có return dữ liệu thì sẽ khớp vs kiểu dữ liệu ở số 2
     //Nếu như có return thì nó là cái step cuối cùng
 
-    private void openPageUrl(WebDriver driver,String pageUrl){
+
+    //Hàm static có nhiệm vụ lấy ra instance của chính class này
+    //Một biến static /hàm của static có thể gọi ra trực tiếp từ phạm vi class
+    public static BasePage getInstance(){
+       return new BasePage();
+    }
+
+    public void openPageUrl(WebDriver driver,String pageUrl){
         driver.get(pageUrl);
     }
 
@@ -175,7 +182,7 @@ public class BasePage {
 
     public void sendkeyToElement(WebDriver driver,String locator,String keyToSend){
 //        driver.findElement(By.xpath(locator)).sendKeys(keyToSend);
-        getWebElement(driver,locator).sendKeys(locator);
+        getWebElement(driver,locator).sendKeys(keyToSend);
     }
 
     public void selectItemInDropdown(WebDriver driver,String locator,String valueItem){
@@ -223,6 +230,7 @@ public class BasePage {
     public String getElementText(WebDriver driver,String locator){
         return getWebElement(driver,locator).getText();
     }
+
 
     public String getElementCss(WebDriver driver,String locator,String propertyName){
        return getWebElement(driver,locator).getCssValue(propertyName);
