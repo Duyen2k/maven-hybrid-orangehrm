@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class Login_02_BasePage_III_Extend extends BasePage {
     private WebDriver driver;
-    String appUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+    private String appUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
 
     @BeforeClass

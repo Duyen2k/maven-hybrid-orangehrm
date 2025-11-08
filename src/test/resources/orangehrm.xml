@@ -2,12 +2,27 @@
 
 <suite name="orangeHRM - UI - Automation Test" verbose="1">
 <!--    suite_name: tên project-->
-    <test name="Run on Firefox browser">
+    <parameter name="appUrl" value="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"></parameter>
+
+    <test name="Run on FIREFOX browser">
+        <parameter name="browser" value="FIREFOX"></parameter>
         <classes>
-            <class name="com.orangehrm.user.Login_02_BasePage_I_Initial"/>
-            <class name="com.orangehrm.user.Login_02_BasePage_II_Static"/>
-            <class name="com.orangehrm.user.Login_02_BasePage_III_Extend"/>
+            <class name="com.orangehrm.user.Login_04_Page_Object_Excercise"/>
         </classes>
     </test>
+
+<!--    <test name="Run on CHROME browser">-->
+<!--        <parameter name="browser" value="Chrome"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.orangehrm.user.Login_04_Page_Object"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="Run on EDGE browser">-->
+<!--        <parameter name="browser" value="Edge"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.orangehrm.user.Login_04_Page_Object"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>

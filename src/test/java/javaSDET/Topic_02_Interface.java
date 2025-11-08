@@ -1,6 +1,6 @@
 package javaSDET;
 
-public interface Topic_02 {
+public interface Topic_02_Interface {
     //default Method
     public default void showStudent(){
 

@@ -6,6 +6,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjects.endUser.BasePageUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -185,7 +186,7 @@ public class BasePage {
         getWebElement(driver,locator).sendKeys(keyToSend);
     }
 
-    public void selectItemInDropdown(WebDriver driver,String locator,String valueItem){
+    public void selectItemInDropdownSelection(WebDriver driver,String locator,String valueItem){
 //        Select select=new Select(getWebElement(driver,locator));
 //        select.selectByVisibleText(valueItem);  => dùng một lần nên gọi trực tiếp luôn ko cần khai báo
 
@@ -200,12 +201,13 @@ public class BasePage {
         return new Select(getWebElement(driver,locator)).isMultiple();
     }
 
-    public void selectItemInDropdown(WebDriver driver,String parentLocator, String childLocator, String textItem) throws InterruptedException {
-        clickToElement(driver,parentLocator);
-        driver.findElement(By.cssSelector(parentLocator)).click();
-        sleepInSecond(2);
+    public void selectItemInDropdownCustome(WebDriver driver,String parentLocator, String childLocator, String textItem)  {
+//        clickToElement(driver,parentLocator);
+        driver.findElement(By.xpath(parentLocator)).click();
+
+//        sleepInSecond(2); throws InterruptedException
         //đợi xổ hết dữ liệu
-        new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childLocator)));
+        new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(childLocator)));
         //list ra tất cả các item bên trong và lưu vào một biê(kiểu dữ liệu là List)
         //Tips: Lấy locator pahir lấy đến cái thẻ chứa Text của item (vì mình đang getText)
         List<WebElement> Allitem = getListElement(driver,childLocator);
@@ -368,8 +370,8 @@ public class BasePage {
         new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
     }
 
-    public void waitListElementInvisible(WebDriver driver,String locator){
-        new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.invisibilityOfAllElements(getListElement(driver,locator)));
+    public boolean waitListElementInvisible(WebDriver driver,String locator){
+       return new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.invisibilityOfAllElements(getListElement(driver,locator)));
     }
 
     public void waitElementPresence(WebDriver driver,String locator){
@@ -378,6 +380,10 @@ public class BasePage {
 
     public void waitListElementPresence(WebDriver driver,String locator){
         new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+    }
+
+    public boolean isLoadingIconDisappear(WebDriver driver){
+       return waitListElementInvisible(driver, BasePageUI.SPINER_ICON);
     }
 
     private final int SHORT_TIMEOUT = 10;

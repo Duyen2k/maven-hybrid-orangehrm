@@ -10,7 +10,7 @@ package javaSDET;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class Topic_01_Keywords extends Topic_06 implements Topic_02 {
+public class Topic_01_Keywords extends Topic_06 implements Topic_02_Interface {
     //Data type
     int i=1234;
     char c='A';

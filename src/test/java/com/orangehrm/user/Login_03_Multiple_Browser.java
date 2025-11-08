@@ -2,29 +2,29 @@ package com.orangehrm.user;
 //import từ thư viện
 
 import core.BasePage;
+import core.BaseTest;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Login_02_BasePage_II_Static {
+public class Login_03_Multiple_Browser extends BaseTest {
     private WebDriver driver;
     private BasePage basePage;
-    private String appUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+    private String appUrl;
 
-
+    @Parameters({"appUrl","browser"})
     @BeforeClass
-    public void beforeClass() {
-        driver = new FirefoxDriver();
-
-        //Ko cần new Basepage=> đảm bảo tính đóng gói(lập trình hướng đối tượng)-ko nhìn thấy khởi tạp trực tiếp
-        basePage = BasePage.getInstance();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
+    public void beforeClass(String appUrl,String browserName) {
+        this.appUrl=appUrl;
+        basePage=BasePage.getInstance();
+        driver=getBrowserDriver(appUrl,browserName);
     }
 
     @Test

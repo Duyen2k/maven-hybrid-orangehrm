@@ -1,6 +1,6 @@
 package javaSDET;
 //Interface kế thừa Interface
-public interface Topic_07 extends Topic_02 {
+public interface Topic_07 extends Topic_02_Interface {
     //default Method
     public default void showStudent(){
 
