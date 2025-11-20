@@ -15,19 +15,19 @@ public class SearchAdminButtonPageObject_Ex extends BasePage {
 
     //Ko nên gọi hàm từ pageObject khác qua(bị tùy tiện)
     public void enterRegistedUserName(String keyToSend) {
-        waitElementVisible(driver,AddAdminButtonUIs_Ex.USERNAME);
-        sendkeyToElement(driver,AddAdminButtonUIs_Ex.USERNAME,keyToSend);
+        waitElementVisible(driver,SearchAdminButtonPageUIs_Ex.USER_NAME_TEXTBOX);
+        sendkeyToElement(driver,SearchAdminButtonPageUIs_Ex.USER_NAME_TEXTBOX,keyToSend);
 //        driver.findElement(By.xpath(SearchAdminButtonPageUIs_Ex.USER_NAME_TEXTBOX)).sendKeys("Admin");
     }
 
     public void enterRegistedUserRole(String userRole) {
-        waitElementVisible(driver,AddAdminButtonUIs_Ex.USER_ROLE_PARENT);
-        selectItemInDropdownCustome(driver,AddAdminButtonUIs_Ex.USER_ROLE_PARENT,AddAdminButtonUIs_Ex.USER_ROLE_CHILDREN,userRole);
+        waitElementVisible(driver,SearchAdminButtonPageUIs_Ex.USER_ROLE_PARENT);
+        selectItemInDropdownCustome(driver,SearchAdminButtonPageUIs_Ex.USER_ROLE_PARENT,SearchAdminButtonPageUIs_Ex.USER_ROLE_CHILDREN,userRole);
     }
 
-    public void enterRegistedStatus(String status) {
-        waitElementVisible(driver,AddAdminButtonUIs_Ex.STATUS_PARENT);
-        selectItemInDropdownCustome(driver,AddAdminButtonUIs_Ex.STATUS_PARENT,AddAdminButtonUIs_Ex.STATUS_CHILDREN,status);
+    public void enterRegistedStatus(String status) { //tạm thời ko dùng
+        waitElementVisible(driver,SearchAdminButtonPageUIs_Ex.STATUS_PARENT);
+        selectItemInDropdownCustome(driver,SearchAdminButtonPageUIs_Ex.STATUS_PARENT,AddAdminButtonUIs_Ex.STATUS_CHILDREN,status);
     }
 
     public void clickToSearchButton() {
