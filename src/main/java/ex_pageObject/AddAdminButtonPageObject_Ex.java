@@ -2,6 +2,7 @@ package ex_pageObject;
 
 import core.BasePage;
 import ex_pageUIs.AddAdminButtonUIs_Ex;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class AddAdminButtonPageObject_Ex extends BasePage {
@@ -30,7 +31,9 @@ public class AddAdminButtonPageObject_Ex extends BasePage {
 
     public void enterEmployeeName() {
         waitElementVisible(driver,AddAdminButtonUIs_Ex.EMPLOYEE_NAME);
-        sendkeyToElement(driver,AddAdminButtonUIs_Ex.EMPLOYEE_NAME,"John Doe");
+//        sendkeyToElement(driver,AddAdminButtonUIs_Ex.EMPLOYEE_NAME,"joker");
+        driver.findElement(By.xpath(AddAdminButtonUIs_Ex.EMPLOYEE_NAME)).sendKeys("joker");
+        waitElementVisible(driver,AddAdminButtonUIs_Ex.EMPLoYEE_NAME_INPUT);
         clickToElement(driver,AddAdminButtonUIs_Ex.EMPLoYEE_NAME_INPUT);
     }
 

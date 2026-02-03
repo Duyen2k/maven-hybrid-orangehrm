@@ -6,7 +6,11 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.endUser.BasePageUI;
+import pageObjects.PageGenerator;
+import pageObjects.openCart.admin.AdminLoginPO;
+import pageObjects.openCart.user.UserHomePO;
+import pageUIs.openCart.CommonOpenCartPageUI;
+import pageUIs.orangHRM.BasePageUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -39,15 +43,13 @@ public class BasePage {
 
     //Hàm static có nhiệm vụ lấy ra instance của chính class này
     //Một biến static /hàm của static có thể gọi ra trực tiếp từ phạm vi class
-    public static BasePage getInstance(){
-       return new BasePage();
-    }
+    public static BasePage getBasePage(){return new BasePage();}
 
     public void openPageUrl(WebDriver driver,String pageUrl){
         driver.get(pageUrl);
     }
 
-    //Ngoại trừ vid: tất cả những thằng khác đều cần return
+    //Ngoại trừ kiểu dữ liệu hàm là void: tất cả những thằng khác đều cần return
     public String getPageTitle(WebDriver driver) {
         return driver.getTitle();
     }
@@ -259,7 +261,7 @@ public class BasePage {
     }
 
     public boolean isElementDisplayed(WebDriver driver,String locator){
-        waitElementInvisible(driver,locator);
+        waitElementVisible(driver,locator);
         return getWebElement(driver,locator).isDisplayed();
     }
 
@@ -330,6 +332,7 @@ public class BasePage {
 
     public void scrollToElementOnTop(WebDriver driver,String locator) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getWebElement(driver,locator));
+        sleepInSecond(1);
     }
 
     public void scrollToElementOnDown(WebDriver driver,String locator) {
@@ -382,11 +385,60 @@ public class BasePage {
         new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
     }
 
+    public void openUrlByNewTAB(WebDriver driver, String url){
+        driver.switchTo().newWindow(WindowType.TAB).get(url);
+    }
+
+    public void openUrlByNewWindown(WebDriver driver, String url){
+        driver.switchTo().newWindow(WindowType.WINDOW).get(url);
+    }
+
+    public String getCurrentWindownID(WebDriver driver){
+        return driver.getWindowHandle();
+    }
+
+    //OrangeHRM
     public boolean isLoadingIconDisappear(WebDriver driver){
        return waitListElementInvisible(driver, BasePageUI.SPINER_ICON);
     }
 
+    //OpenCart
+    //Vì tất cả các thằng đều có thể logout
+    public UserHomePO clickToLogoutLinkAtUserSite(WebDriver driver) {
+        scrollToElementOnTop(driver, CommonOpenCartPageUI.MY_ACCOUNT_MODULE);
+        waitElementClickable(driver, CommonOpenCartPageUI.MY_ACCOUNT_MODULE);
+        clickToElement(driver, CommonOpenCartPageUI.MY_ACCOUNT_MODULE);
+        sleepInSecond(1);
+
+//        waitElementClickable(driver,CommonOpenCartPageUI.LOGOUT_LINK);
+//        waitListElementInvisible(driver,CommonOpenCartPageUI.LIST_MODULE);
+        waitElementClickable(driver,CommonOpenCartPageUI.LOGOUT_LINK);
+        sleepInSecond(1);
+        clickToElement(driver,CommonOpenCartPageUI.LOGOUT_LINK);
+
+//        waitElementClickable(driver,CommonOpenCartPageUI.CONTINUE_BUTTON);
+//        clickToElement(driver,CommonOpenCartPageUI.CONTINUE_BUTTON);
+
+        return PageGenerator.getPage(UserHomePO.class,driver);
+    }
+
+    public AdminLoginPO clickToLogoutLinkAtAdminSite(WebDriver driver) {
+        waitElementClickable(driver,CommonOpenCartPageUI.ADMIN_LOGOUT_BUTTON);
+        clickToElement(driver,CommonOpenCartPageUI.ADMIN_LOGOUT_BUTTON);
+        //wait clickable to Logout link
+        //click to log out link
+        return PageGenerator.getPage(AdminLoginPO.class,driver);
+    }
+
+    public void openAdminSite(WebDriver driver,String adminURL) {
+        openPageUrl(driver, adminURL);
+    }
+
+    public UserHomePO openUserSite(WebDriver driver,String userURL) {
+        openPageUrl(driver, userURL);
+        return PageGenerator.getPage(UserHomePO.class,driver);
+    }
+
     private final int SHORT_TIMEOUT = 10;
     private final int LONG_TIMEOUT = 30;
-
-    }
+}

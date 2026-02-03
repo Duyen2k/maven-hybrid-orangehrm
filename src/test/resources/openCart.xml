@@ -2,12 +2,13 @@
 
 <suite name="orangeHRM - UI - Automation Test" verbose="1">
 <!--    suite_name: tên project-->
-    <parameter name="appUrl" value="http://localhost:88/orangehrm-5.7"></parameter>
+    <parameter name="userUrl" value="http://localhost:88/opencart/"></parameter>
+    <parameter name="adminUrl" value="http://localhost:88/opencart/Myadmin"></parameter>
 
     <test name="Run on FIREFOX browser">
         <parameter name="browser" value="FIREFOX"></parameter>
         <classes>
-            <class name="orangehrm.Level_08_Page_Navigator"/>
+            <class name="openCart.Level_10_Multiple_Driver"/>
         </classes>
     </test>
 

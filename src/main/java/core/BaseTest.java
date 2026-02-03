@@ -10,15 +10,15 @@ import java.time.Duration;
 public class BaseTest {
     private WebDriver driver;
     protected WebDriver getBrowserDriver(String appUrl,String browserName){
-        BrowserList browserList=BrowserList.valueOf(browserName);
+        BrowserList browserList=BrowserList.valueOf(browserName.toUpperCase());
         switch (browserList){
             case FIREFOX:
                 driver = new FirefoxDriver();
                 break;
-            case SAFARI:
+            case CHROME:
                 driver=new ChromeDriver();
                 break;
-            case CHROME:
+            case EDGE:
                 driver=new EdgeDriver();
                 break;
             default:
@@ -27,7 +27,12 @@ public class BaseTest {
 
         driver.get(appUrl);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return driver;
+    }
+
+    protected void closeBrowser(WebDriver driver){
+        if(!(null==driver));
+        driver.quit();
     }
 }
