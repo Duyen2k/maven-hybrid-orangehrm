@@ -1,7 +1,7 @@
 package pageObjects.orangeHRM;
 
 import org.openqa.selenium.WebDriver;
-import pageObjects.orangeHRM.editNavigation.ContactDetailPagePageObject;
+import pageObjects.orangeHRM.editNavigation.ContactDetailPageObject;
 import pageObjects.orangeHRM.editNavigation.PersonalDetailPageObject;
 
 public class PageGeneratorManager {
@@ -26,7 +26,7 @@ public class PageGeneratorManager {
         return new PersonalDetailPageObject(driver);
     }
 
-    public static ContactDetailPagePageObject getContactDetailPage (WebDriver driver){
-        return new ContactDetailPagePageObject(driver);
+    public static ContactDetailPageObject getContactDetailPage (WebDriver driver){
+        return new ContactDetailPageObject(driver);
     }
 }

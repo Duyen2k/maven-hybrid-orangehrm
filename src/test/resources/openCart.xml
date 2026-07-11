@@ -5,8 +5,8 @@
     <parameter name="userUrl" value="http://localhost:88/opencart/"></parameter>
     <parameter name="adminUrl" value="http://localhost:88/opencart/Myadmin"></parameter>
 
-    <test name="Run on FIREFOX browser">
-        <parameter name="browser" value="FIREFOX"></parameter>
+    <test name="Run on CHROME browser">
+        <parameter name="browser" value="Chrome"></parameter>
         <classes>
             <class name="openCart.Level_10_Multiple_Driver"/>
         </classes>

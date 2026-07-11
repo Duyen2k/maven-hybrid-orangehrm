@@ -12,7 +12,7 @@ import pageObjects.orangeHRM.AddEmployeePageObject;
 import pageObjects.orangeHRM.DashboardPageObject;
 import pageObjects.orangeHRM.EmployeeListPageObject;
 import pageObjects.orangeHRM.LoginPageObject;
-import pageObjects.orangeHRM.editNavigation.ContactDetailPagePageObject;
+import pageObjects.orangeHRM.editNavigation.ContactDetailPageObject;
 import pageObjects.orangeHRM.editNavigation.PersonalDetailPageObject;
 
 public class Level_06_Page_Manager_II extends BaseTest {
@@ -66,7 +66,7 @@ public class Level_06_Page_Manager_II extends BaseTest {
         addEmployeePage.enterToLastnameTextbox(employeeLastname);
         employeeID =addEmployeePage.getEmployeeID();
 
-        personalDetailPage= addEmployeePage.clickToSaveButton();
+        personalDetailPage= addEmployeePage.clickToSaveButton();  //thay doi cho khac, neu muon test thi update lai
 
         //Khoi tao
 //        personalDetailPage=new PersonalDetailPageObject(driver);
@@ -93,7 +93,7 @@ public class Level_06_Page_Manager_II extends BaseTest {
     private EmployeeListPageObject employeeListPage;
     private AddEmployeePageObject addEmployeePage;
     private PersonalDetailPageObject personalDetailPage;
-    private ContactDetailPagePageObject contactDetailPage;
+    private ContactDetailPageObject contactDetailPage;
     private String employeeID,adminUsername,adminPassword,employeeFirstname,employeeLastname;
 
     @AfterClass

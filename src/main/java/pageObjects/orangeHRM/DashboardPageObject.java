@@ -3,7 +3,9 @@ package pageObjects.orangeHRM;
 import core.BasePage;
 import org.openqa.selenium.WebDriver;
 import pageObjects.PageGenerator;
+import pageObjects.orangeHRM.NavigatorByDynamicLocator.EmployeeListPO;
 import pageUIs.orangHRM.DashboardPageUI;
+import pageUIs.orangHRM.LoginPageUI;
 
 public class DashboardPageObject extends BasePage {
     private WebDriver driver;
@@ -18,4 +20,8 @@ public class DashboardPageObject extends BasePage {
         return PageGenerator.getPage(EmployeeListPageObject.class,driver);
     }
 
+    public boolean isDashboardHeaderDisplayed(WebDriver driver) {
+        waitElementVisible(driver, DashboardPageUI.DASHBOARD_HEADER);
+        return isElementDisplayed(driver, DashboardPageUI.DASHBOARD_HEADER);
+    }
 }

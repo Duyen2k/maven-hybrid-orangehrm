@@ -24,6 +24,6 @@ public class LoginPageObject_Ex extends BasePage {
 
     public void clickToLoginButton() {
         waitElementVisible(driver, LoginPageUIs_Ex.LOGIN_BUTTON);
-        clickToElement(driver, LoginPageUIs_Ex.LOGIN_BUTTON);
+        clickToElement(driver, LoginPageUIs_Ex.LOGIN_BUTTON,"");
     }
 }

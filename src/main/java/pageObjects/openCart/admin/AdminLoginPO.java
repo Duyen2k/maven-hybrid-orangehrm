@@ -23,8 +23,8 @@ public class AdminLoginPO extends BasePage {
     }
 
     public void clickToLoginButtonAtAdminSite() {
-        waitElementClickable(driver,AdminLoginPageUI.lOGIN_BUTTON);
-        clickToElement(driver,AdminLoginPageUI.lOGIN_BUTTON);
+        waitElementClickable(driver,AdminLoginPageUI.lOGIN_BUTTON,"");
+        clickToElement(driver,AdminLoginPageUI.lOGIN_BUTTON,"");
         sleepInSecond(5);
 //        return PageGenerator.getPage(AdminDashboardPO.class,driver);
     }

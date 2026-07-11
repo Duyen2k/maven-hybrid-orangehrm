@@ -13,6 +13,6 @@ public class DashboardPageObject_Ex extends BasePage {
     }
 
     public void clickToAdminButton(WebDriver driver) {
-        clickToElement(driver, DashboardPageUIs_Ex.ADMIN_BUTTON);
+        clickToElement(driver, DashboardPageUIs_Ex.ADMIN_BUTTON,"");
     }
 }

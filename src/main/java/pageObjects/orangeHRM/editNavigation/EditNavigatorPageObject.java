@@ -15,25 +15,37 @@ public class EditNavigatorPageObject extends BasePage {
 // Da co driver cua contructor
     public JobPageObject openJobPage() {
         waitElementVisible(driver,  EditNavigatorPageUI.JOB_MODULE);
-        clickToElement(driver, EditNavigatorPageUI.JOB_MODULE);
+        clickToElement(driver, EditNavigatorPageUI.JOB_MODULE,"");
         return PageGenerator.getPage(JobPageObject.class,driver);
     }
 
     public DependentsPageObject openDependentsPage() {
         waitElementVisible(driver, EditNavigatorPageUI.DEPENDENCES_MODULE);
-        clickToElement(driver, EditNavigatorPageUI.DEPENDENCES_MODULE);
+        clickToElement(driver, EditNavigatorPageUI.DEPENDENCES_MODULE,"");
         return PageGenerator.getPage(DependentsPageObject.class,driver);
     }
 
     public PersonalDetailPageObject openPersonalDetailPage() {
         waitElementVisible(driver, EditNavigatorPageUI.PERSONAL_DETAIL_MODULE);
-        clickToElement(driver, EditNavigatorPageUI.PERSONAL_DETAIL_MODULE);
+        clickToElement(driver, EditNavigatorPageUI.PERSONAL_DETAIL_MODULE,"");
         return PageGenerator.getPage(PersonalDetailPageObject.class,driver);
     }
 
-    public ContactDetailPagePageObject openContactDetailPage() {
+    public ContactDetailPageObject openContactDetailPage() {
         waitElementVisible(driver,EditNavigatorPageUI.CONTACT_DETAIL_MODULE);
         clickToElement(driver,EditNavigatorPageUI.CONTACT_DETAIL_MODULE);
-        return PageGenerator.getPage(ContactDetailPagePageObject.class,driver) ;
+        return PageGenerator.getPage(ContactDetailPageObject.class,driver) ;
+    }
+
+    public EditNavigatorPageObject editNavigatorPageByName(String pageName){
+        waitElementClickable(driver,EditNavigatorPageUI.openEditNavigatorPageByName,pageName);
+        clickToElement(driver,EditNavigatorPageUI.openEditNavigatorPageByName,pageName);
+        switch (pageName){
+            case "Contact Details":
+                return PageGenerator.getPage(ContactDetailPageObject.class,driver);
+            case "Dependents":
+                return PageGenerator.getPage(DependentsPageObject.class,driver);
+
+        } throw new RuntimeException("Page name is not valid" + pageName);
     }
 }

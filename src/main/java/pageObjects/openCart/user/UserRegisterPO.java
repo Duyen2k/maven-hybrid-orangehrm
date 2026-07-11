@@ -33,18 +33,19 @@ public class UserRegisterPO extends BasePage {
     }
 
     public void acceptPrivacyCheckbox() {
-        waitElementVisible(driver, UserRegisterPageUI.AGREE_CHECKBOX);
-        clickToElement(driver, UserRegisterPageUI.AGREE_CHECKBOX);
+        scrollToElementOnTop(driver,UserRegisterPageUI.AGREE_CHECKBOX,"");
+        waitElementVisible(driver, UserRegisterPageUI.AGREE_CHECKBOX,"");
+        clickToElement(driver, UserRegisterPageUI.AGREE_CHECKBOX,"");
     }
 
     public void clickContinueButtonToLogin() {
-        waitElementVisible(driver, UserRegisterPageUI.CONTINUE_BUTTON);
-        clickToElement(driver, UserRegisterPageUI.CONTINUE_BUTTON);
+        waitElementVisible(driver, UserRegisterPageUI.CONTINUE_BUTTON,"");
+        clickToElement(driver, UserRegisterPageUI.CONTINUE_BUTTON,"");
     }
 
     public boolean isSuccessMessageDisplayed() {
         sleepInSecond(5);
-        waitElementVisible(driver,UserRegisterPageUI.SUCCESS_MESSAGE);
+        waitElementVisible(driver,UserRegisterPageUI.SUCCESS_MESSAGE,"");
         return isElementDisplayed(driver,UserRegisterPageUI.SUCCESS_MESSAGE );
     }
 

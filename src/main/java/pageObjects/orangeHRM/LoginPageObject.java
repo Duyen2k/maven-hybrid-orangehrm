@@ -38,7 +38,7 @@ public class LoginPageObject extends BasePage {
 
     public DashboardPageObject clickToLoginButton() {
         waitElementVisible(driver,LoginPageUI.LOGIN_BUTTON);
-        clickToElement(driver,LoginPageUI.LOGIN_BUTTON);
+        clickToElement(driver,LoginPageUI.LOGIN_BUTTON,"");
         return PageGenerator.getPage(DashboardPageObject.class,driver);
     }
 }

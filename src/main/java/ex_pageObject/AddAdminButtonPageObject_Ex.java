@@ -15,7 +15,7 @@ public class AddAdminButtonPageObject_Ex extends BasePage {
 
     public void clickToAddButton() {
         waitElementVisible(driver,AddAdminButtonUIs_Ex.ADD_BUTTON);
-        clickToElement(driver,AddAdminButtonUIs_Ex.ADD_BUTTON);
+        clickToElement(driver,AddAdminButtonUIs_Ex.ADD_BUTTON,"");
 
     }
 
@@ -34,7 +34,7 @@ public class AddAdminButtonPageObject_Ex extends BasePage {
 //        sendkeyToElement(driver,AddAdminButtonUIs_Ex.EMPLOYEE_NAME,"joker");
         driver.findElement(By.xpath(AddAdminButtonUIs_Ex.EMPLOYEE_NAME)).sendKeys("joker");
         waitElementVisible(driver,AddAdminButtonUIs_Ex.EMPLoYEE_NAME_INPUT);
-        clickToElement(driver,AddAdminButtonUIs_Ex.EMPLoYEE_NAME_INPUT);
+        clickToElement(driver,AddAdminButtonUIs_Ex.EMPLoYEE_NAME_INPUT,"");
     }
 
     public void enterPassword(String password) {
@@ -54,6 +54,6 @@ public class AddAdminButtonPageObject_Ex extends BasePage {
 
     public void clickToSaveButton() {
         waitElementVisible(driver,AddAdminButtonUIs_Ex.SUBMIT_BUTTON);
-        clickToElement(driver,AddAdminButtonUIs_Ex.SUBMIT_BUTTON);
+        clickToElement(driver,AddAdminButtonUIs_Ex.SUBMIT_BUTTON,"");
     }
 }

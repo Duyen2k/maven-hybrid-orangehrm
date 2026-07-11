@@ -82,8 +82,8 @@ public class Level_10_Multiple_Driver extends BaseTest {
 
     @AfterClass
     public void afterClass(){
-        closeBrowser(userDriver);
-        closeBrowser(adminDriver);
+//        closeBrowser(userDriver);
+//        closeBrowser(adminDriver);
     }
     private WebDriver userDriver;
     private WebDriver adminDriver;

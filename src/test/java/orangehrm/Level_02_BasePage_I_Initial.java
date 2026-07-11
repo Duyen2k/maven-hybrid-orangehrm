@@ -32,7 +32,7 @@ public class Level_02_BasePage_I_Initial {
         basePage.sendkeyToElement(driver, "//input[@name='username']", "");
         basePage.sendkeyToElement(driver, "//input[@name='password']", "");
         basePage.waitElementClickable(driver,"//button[contains(@class,'orangehrm-login-button')]");
-        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]");
+        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]","");
 
         Assert.assertEquals(basePage.getElementText(driver, "//input[@name='username']/parent::div/following-sibling::span"), "Required");
         Assert.assertEquals(basePage.getElementText(driver, "//input[@name='password']/parent::div/following-sibling::span"), "Required");
@@ -44,7 +44,7 @@ public class Level_02_BasePage_I_Initial {
 
         basePage.sendkeyToElement(driver, "//input[@name='username']", "duyen@gmail.com");
         basePage.sendkeyToElement(driver, "//input[@name='password']", "12345");
-        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]");
+        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]","");
 
         Assert.assertEquals(basePage.getElementText(driver,"//div[@class='orangehrm-login-error']//p[contains(@class,'oxd-alert-content-text')]"),"Invalid credentials");
     }
@@ -56,7 +56,7 @@ public class Level_02_BasePage_I_Initial {
 
         basePage.sendkeyToElement(driver, "//input[@name='username']", "Admin");
         basePage.sendkeyToElement(driver, "//input[@name='password']", "123455678");
-        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]");
+        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]","");
 
         Assert.assertEquals(basePage.getElementText(driver,"//div[@class='orangehrm-login-error']//p[contains(@class,'oxd-alert-content-text')]"),"Invalid credentials");
     }
@@ -67,7 +67,7 @@ public class Level_02_BasePage_I_Initial {
 
         basePage.sendkeyToElement(driver, "//input[@name='username']", "Admin");
         basePage.sendkeyToElement(driver, "//input[@name='password']", "admin123");
-        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]");
+        basePage.clickToElement(driver, "//button[contains(@class,'orangehrm-login-button')]","");
 
         basePage.waitListElementInvisible(driver,"//div[contains(@class,'oxd-loading-spinner-container')]");
         //        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));

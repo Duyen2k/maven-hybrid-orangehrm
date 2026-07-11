@@ -1,11 +1,12 @@
 package pageObjects.orangeHRM.editNavigation;
 
 import org.openqa.selenium.WebDriver;
+import pageUIs.orangHRM.BasePageUI;
 
-public class ContactDetailPagePageObject extends EditNavigatorPageObject {
+public class ContactDetailPageObject extends EditNavigatorPageObject {
     private WebDriver driver;
 
-    public ContactDetailPagePageObject(WebDriver driver) {
+    public ContactDetailPageObject(WebDriver driver) {
         super(driver);  //driver nay cua B
         this.driver = driver;
 
@@ -15,7 +16,8 @@ public class ContactDetailPagePageObject extends EditNavigatorPageObject {
     }
 
 
-
-
-
+    public boolean isContactDetailsHeaderDisplayed(String restParam) {
+        waitElementVisible(driver, BasePageUI.MODULE_HEADER,restParam);
+        return isElementDisplayed(driver, BasePageUI.MODULE_HEADER,restParam);
+    }
 }

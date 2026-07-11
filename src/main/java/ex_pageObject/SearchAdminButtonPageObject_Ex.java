@@ -32,6 +32,6 @@ public class SearchAdminButtonPageObject_Ex extends BasePage {
 
     public void clickToSearchButton() {
         waitElementVisible(driver,SearchAdminButtonPageUIs_Ex.SEARCH_BUTTON);
-        clickToElement(driver,SearchAdminButtonPageUIs_Ex.SEARCH_BUTTON);
+        clickToElement(driver,SearchAdminButtonPageUIs_Ex.SEARCH_BUTTON,"");
     }
 }

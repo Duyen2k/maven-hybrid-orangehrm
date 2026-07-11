@@ -10,7 +10,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.PageGenerator;
 import pageObjects.orangeHRM.*;
-import pageObjects.orangeHRM.editNavigation.ContactDetailPagePageObject;
+import pageObjects.orangeHRM.editNavigation.ContactDetailPageObject;
 import pageObjects.orangeHRM.editNavigation.PersonalDetailPageObject;
 
 public class Level_06_Page_Manager_IV extends BaseTest {
@@ -89,7 +89,7 @@ public class Level_06_Page_Manager_IV extends BaseTest {
     private EmployeeListPageObject employeeListPage;
     private AddEmployeePageObject addEmployeePage;
     private PersonalDetailPageObject personalDetailPage;
-    private ContactDetailPagePageObject contactDetailPage;
+    private ContactDetailPageObject contactDetailPage;
     private String employeeID,adminUsername,adminPassword,employeeFirstname,employeeLastname;
 
     @AfterClass

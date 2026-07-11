@@ -13,8 +13,13 @@ public class EmployeeListPageObject extends BasePage {
     }
 
     public AddEmployeePageObject clickToAddEmployeeButton() {
-        waitElementClickable(driver, EmployeeListPageUI.ADD_EMPLOYEE_BUTTON);
-        clickToElement(driver,EmployeeListPageUI.ADD_EMPLOYEE_BUTTON);
+        waitElementClickable(driver, EmployeeListPageUI.ADD_EMPLOYEE_BUTTON,"");
+        clickToElement(driver,EmployeeListPageUI.ADD_EMPLOYEE_BUTTON,"");
         return PageGenerator.getPage(AddEmployeePageObject.class,driver);
+    }
+
+    public boolean isPIMHeaderDisplayed(WebDriver driver) {
+        waitElementVisible(driver,EmployeeListPageUI.PIM_HEADER,"");
+        return isElementDisplayed(driver,EmployeeListPageUI.PIM_HEADER,"");
     }
 }

@@ -14,8 +14,8 @@ public class AdminDashboardPO extends BasePage {
 
     public AdminCustomerPO openCustomerPageAtAdminSite() {
         waitElementClickable(driver, AdminDashboardPageUI.CUSTOMER_MENU);
-        clickToElement(driver, AdminDashboardPageUI.CUSTOMER_MENU);
-        clickToElement(driver, AdminDashboardPageUI.CUSTOMER_MODULE);
+        clickToElement(driver, AdminDashboardPageUI.CUSTOMER_MENU,"");
+        clickToElement(driver, AdminDashboardPageUI.CUSTOMER_MODULE,"");
         return PageGenerator.getPage(AdminCustomerPO.class,driver);
     }
 }
