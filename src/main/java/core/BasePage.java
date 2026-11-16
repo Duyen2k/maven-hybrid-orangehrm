@@ -15,6 +15,7 @@ import pageUIs.orangHRM.BasePageUI;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 public class BasePage {
@@ -174,8 +175,8 @@ public class BasePage {
         return driver.findElement(getByLocator(locator));
     }
 
-    public List<WebElement> getListElement(WebDriver driver,String locator){
-        return driver.findElements(getByLocator(locator));
+    public List<WebElement> getListElement(WebDriver driver,String locator,String...dynamicValue){
+        return driver.findElements(getByLocator(castParam(locator,dynamicValue)));
     }
 
     public List<WebElement> getListElementDynamic(WebDriver driver,String locator, String...value){
@@ -239,16 +240,18 @@ public class BasePage {
         return new Select(getWebElement(driver,locator)).isMultiple();
     }
 
-    public void selectItemInDropdownCustome(WebDriver driver,String parentLocator, String childLocator, String textItem)  {
+    public void selectItemInDropdownCustome(WebDriver driver,String parentLocator, String childLocator, String textItem,String...valueParam)  {
 //        clickToElement(driver,parentLocator);
-        driver.findElement(getByLocator(parentLocator)).click();
+        String actualParentLocator=castParam(parentLocator,valueParam);
+        driver.findElement(getByLocator(actualParentLocator)).click();
 
 //        sleepInSecond(2); throws InterruptedException
         //đợi xổ hết dữ liệu
-        new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childLocator)));
+        String actualChildLocator=castParam(childLocator,valueParam);
+        new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(actualChildLocator)));
         //list ra tất cả các item bên trong và lưu vào một biê(kiểu dữ liệu là List)
         //Tips: Lấy locator pahir lấy đến cái thẻ chứa Text của item (vì mình đang getText)
-        List<WebElement> Allitem = getListElement(driver,childLocator);
+        List<WebElement> Allitem = getListElement(driver,actualChildLocator);
         //Duyệt qua từng cái element để kiểm tra
         for (WebElement item: Allitem ){
             //Kiêm tra điều kiện: nếu text của item lấy ra bằng với mong đợi
@@ -265,7 +268,6 @@ public class BasePage {
         for (String file:fileNames){
             fullFileName=fullFileName + filePath + file + "\n";
         }
-
         getWebElement(driver, BaseUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName.trim());
 
     }
@@ -274,12 +276,12 @@ public class BasePage {
         return getWebElement(driver,locator).getDomAttribute(atributeName);
     }
 
-    public String getElementDOMProperty(WebDriver driver,String locator,String atributeName){
-        return getWebElement(driver,locator).getDomProperty(atributeName);
+    public String getElementDOMProperty(WebDriver driver,String locator,String atributeName,String...dynamicValue){
+        return getWebElement(driver,castParam(locator,dynamicValue)).getDomProperty(atributeName);
     }
 
-    public String getElementText(WebDriver driver,String locator){
-        return getWebElement(driver,locator).getText();
+    public String getElementText(WebDriver driver,String locator,String...restValue){
+        return getWebElement(driver,castParam(locator,restValue)).getText();
     }
 
 
@@ -308,10 +310,75 @@ public class BasePage {
         }
     }
 
-    public boolean isElementDisplayed(WebDriver driver,String locator,String...restParam){
-        waitElementVisible(driver,castParam(locator,restParam));
-        return getWebElement(driver,castParam(locator,restParam)).isDisplayed();
+    private void overrideImplicitWait(WebDriver driver, long timeInSecond){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeInSecond));
     }
+
+    //Cách 1: Ko dùng Try-Catch (có override Timeout)
+    public boolean isElementNonPresence(WebDriver driver, String locator,String dynamicValue){
+        overrideImplicitWait(driver,GlobalConstants.SHORT_TIMEOUT);
+        List<WebElement> elements =getListElement(driver,locator,dynamicValue);
+        overrideImplicitWait(driver,GlobalConstants.LONG_TIMEOUT);
+        if(elements.size()==0){
+            //TH3: Element khong hien thi tren UI va khong xuat hien trong DOM (Non-presence)
+            return true;
+        } else return false;
+        //TH1: Element co hien thi tren UI va xuat hien trong DOM (Visible/Displayed)
+        //TH2: Element ko hien thi tren UI va co xuat hien trong DOM (Invisible)
+    }
+
+    //Cách 2: Dùng try-catch
+    public boolean isElementNotPresence(WebDriver driver,String locator, String dynamicValue){
+        overrideImplicitWait(driver,GlobalConstants.SHORT_TIMEOUT);
+        List<WebElement> elements= getListElement(driver,locator,dynamicValue);
+        try {
+            if(elements.isEmpty()){
+            return true;
+            //TH3: Element khong hien thi tren UI va khong xuat hien trong DOM (Non-presence)
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+        return false;
+        } finally {
+            overrideImplicitWait(driver,GlobalConstants.LONG_TIMEOUT);
+        }
+    }
+
+
+    //Cách 3: ko dùng isDisplay/ko dùng finds.size()==0
+    public boolean isElementNonePresence(WebDriver driver, String locator,String dynamicLocator){
+        try{
+            overrideImplicitWait(driver,0); //Phải cho implicit=0
+            return new WebDriverWait(driver,Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.numberOfElementsToBe(getByLocator(castParam(locator,dynamicLocator)),0)).isEmpty();
+        } catch (Exception e){
+            return  false;
+        } finally {
+            overrideImplicitWait(driver,GlobalConstants.LONG_TIMEOUT);
+        }
+    }
+
+    public boolean isElementHidden(WebDriver driver,String locator, String dynamicValue){
+        List<WebElement> elements=getListElement(driver,locator,dynamicValue);
+        if(elements.size()>0 && !elements.getFirst().isDisplayed()){
+            return true;
+            //TH2: Element ko hien thi tren UI va co xuat hien trong DOM (Invisible)
+        }else return false;
+        //TH1: Element co hien thi tren UI va xuat hien trong DOM (Visible/Displayed)
+        //TH3: Element khong hien thi tren UI va khong xuat hien trong DOM (Non-presence)
+    }
+
+    public boolean isElementDisplayed(WebDriver driver,String locator,String...restParam){
+        //waitElementVisible(driver,castParam(locator,restParam));
+        try{
+        //TH1: Display tren UI va trong DOM => VerifyTrue
+        //TH2: Ko display tren UI - nhung van co trong DOM => VerifyFalse
+        return getWebElement(driver,castParam(locator,restParam)).isDisplayed();
+    } catch (NoSuchElementException exception) {
+            return false; //TH3: Ko display tren UI va trong DOM
+        }
+    }
+
 
     public boolean isElementSelected(WebDriver driver,String locator){
         waitElementSelected(driver,locator);
@@ -419,6 +486,23 @@ public class BasePage {
 
     public void waitElementInvisible(WebDriver driver,String locator,String...restParam){
         new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(castParam(locator,restParam))));
+    }
+
+    public boolean waitForAllSpinnersInvisible(WebDriver driver, String locator, String... restParam) {
+        String formattedXpath = castParam(locator, restParam);
+
+        return new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT)).until(driver1 -> {
+            // Mỗi lần loop của WebDriverWait sẽ quét lại danh sách Spinner mới nhất trên DOM
+            List<WebElement> spinners = driver1.findElements(getByLocator(formattedXpath));
+
+            // Kiểm tra xem tất cả các spinner tìm thấy đã ẩn (hoặc không còn trên DOM) hay chưa
+            for (WebElement spinner : spinners) {
+                if (spinner.isDisplayed()) {
+                    return false; // Vẫn còn ít nhất 1 spinner đang hiện -> Tiếp tục chờ
+                }
+            }
+            return true; // Tất cả spinner đã ẩn hoặc biến mất khỏi DOM -> Đi tiếp
+        });
     }
 
     public boolean waitListElementInvisible(WebDriver driver,String locator,String...restParam){

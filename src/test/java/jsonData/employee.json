@@ -1,0 +1,18 @@
+{
+  "adminUsername": "AutomationDemo",
+  "adminPassword": "Auto222$$",
+  "NewEmployee": {
+    "firstname": "John",
+    "lastname": "Bieber",
+    "password": "Automationtest123@",
+    "email": "automation@gmail.com",
+    "userName": "JohnBieber"
+  },
+  "PersonalDetail": {
+    "driverLicense": "123-123-445",
+    "nationality": "Vietnamese",
+    "dob": "2002-20-02",
+    "gender": "Male"
+  },
+  "language": ["Java","Python","Ruby"]
+}

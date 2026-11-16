@@ -21,7 +21,7 @@ public class GlobalConstants {
     public static final String ADMIN_PASSWORD="";
 
     //Wait Infor
-    public static final long SHORT_TIMEOUT =10;
+    public static final long SHORT_TIMEOUT =5;
     public static final long LONG_TIMEOUT =30;
 
     //Download/ Upload file (du
@@ -40,7 +40,9 @@ public class GlobalConstants {
     public static final String EXTENT_PATCH=PROJECT_PATH + "htmlExtent";
     public static final String ALLURE_PATCH=PROJECT_PATH + "htmlAllure";
 
-
+    //Data Test/ Environment
+    public static final String DATA_TEST_PATH=PROJECT_PATH +"/dataTest";
+    public static final String JSON_DATA_TEST_PATH=PROJECT_PATH + "/src/test/java/jsonData/";
 
 
 

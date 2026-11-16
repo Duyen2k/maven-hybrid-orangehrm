@@ -3,10 +3,8 @@ package pageObjects.orangeHRM.NavigatorByDynamicLocator;
 import components.ButtonComponent;
 import components.TextboxComponent;
 import core.BaseComponent;
-import core.BasePage;
 import org.openqa.selenium.WebDriver;
 import pageObjects.PageGenerator;
-import pageObjects.orangeHRM.DashboardPageObject;
 import pageUIs.orangHRM.LoginPageUI;
 
 public class LoginPO extends BaseComponent {
@@ -42,8 +40,19 @@ public class LoginPO extends BaseComponent {
     public void loginToApplication(String adminUsername, String adminPassword) {
         textboxComponent.enterToTextboxByName(adminUsername,"username");
         textboxComponent.enterToTextboxByName(adminPassword,"password");
-        buttonComponent.clickToButtonByText("Login");
+        buttonComponent.clickToButtonByName("Login");
         //return PageGenerator.getPage(DashboardPO.class,driver);
+        //khoi tao luon tren man hinh nen dung them wait vi luc load Dashboard no lau, ma minh dang doi load Dashboard
+        //tu step login, nen khi khoi tao doc lap Dashboard luc no hung duoc tu login, luc ko
+    }
+
+    //LiveCode
+    public DashboardPO loginToApp(String adminUsername, String adminPassword) {
+        textboxComponent.enterToTextboxByName(adminUsername,"username");
+        textboxComponent.enterToTextboxByName(adminPassword,"password");
+        buttonComponent.clickToButtonByName("Login");
+        isLoadingIconDisappear(driver);
+        return PageGenerator.getPage(DashboardPO.class,driver);
         //khoi tao luon tren man hinh nen dung them wait vi luc load Dashboard no lau, ma minh dang doi load Dashboard
         //tu step login, nen khi khoi tao doc lap Dashboard luc no hung duoc tu login, luc ko
     }

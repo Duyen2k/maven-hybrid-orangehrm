@@ -1,0 +1,15 @@
+{
+  "PersonList": [
+    {
+      "personName": "John Kendy",
+      "personCity": "Los Angeles",
+      "personAddress": "25 LA Galaxy"
+    },
+
+    {
+      "personName": "Lisa Kendy",
+      "personCity": "London",
+      "personAddress": "23 Harmbug Street"
+    }
+  ]
+}

@@ -1,16 +1,36 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="orangeHRM - UI - Automation Test" verbose="1">
+<!--    <groups>-->
+<!--        <run> <include name="full"/>-->
+<!--        </run>-->
+<!--    </groups>-->
+
     <listeners>
         <listener class-name="reportConfig.MethodListener"></listener>
     </listeners>
 <!--    suite_name: tên project-->
-    <parameter name="appUrl" value="http://localhost:88/orangehrm-5.7"></parameter>
+    <parameter name="appUrl" value="http://localhost:88/orangehrm-5.9/"></parameter>
+
 
     <test name="Run on Chrome browser">
         <parameter name="browser" value="Chrome"></parameter>
-        <classes>
-            <class name="orangehrm.Level_11_Component_II"/>
+<!--        <parameter name="adminUsername" value="AutomationDemo"></parameter>-->
+<!--        <parameter name="adminPassword" value="Auto222$$"></parameter>-->
+<!--        <parameter name="valueSendTofirstname" value="John"></parameter>-->
+<!--        <parameter name="valueSendTolastname" value="Henry"></parameter>-->
+<!--        <parameter name="createUsername" value="HenryJohn123"></parameter>-->
+<!--        <parameter name="createdpassword" value="Automationtest12345@"></parameter>-->
+<!--        <parameter name="createdConfirmpassword" value="Automationtest12345@"></parameter>-->
+
+<!--        <packages> &lt;!&ndash;để package(module) để ko phải list hết ra trong class(chứa nhiều TC)(này dùng từ khóa cho tất cả các class luôn)&ndash;&gt;-->
+<!--        &lt;!&ndash; ko can dung class nua&ndash;&gt;-->
+<!--            <package name="employee"></package>-->
+<!--            <package name="sort"></package>-->
+<!--        </packages>-->
+
+                <classes>
+            <class name="orangehrm.Level_15_DataTest_VI_DataDriven_Json"/>
         </classes>
     </test>
 

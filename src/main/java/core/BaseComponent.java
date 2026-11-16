@@ -17,11 +17,13 @@ public class BaseComponent extends BasePage {
 
     public void clickToAddDetailCheckbox(){
         waitElementVisible(driver,BaseComponentUI.CREATE_DETAIL_CHECKBOX);
-        clickToElement(driver,BaseComponentUI.CREATE_DETAIL_CHECKBOX,"");
+        clickToElement(driver,BaseComponentUI.CREATE_DETAIL_CHECKBOX);
     }
 
-    public void enterToTextboxByLabel(String valueToSend,String valueName){
+    public void enterToTextboxByLabelName(String valueToSend, String valueName){
         waitElementVisible(driver,BaseComponentUI.TEXTBOX_BY_LABEL,valueName);
         sendkeyToElement(driver,BaseComponentUI.TEXTBOX_BY_LABEL,valueToSend,valueName);
     }
+
+
 }

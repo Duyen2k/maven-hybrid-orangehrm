@@ -1,11 +1,10 @@
 package pageObjects.orangeHRM.NavigatorByDynamicLocator;
 
-import componentUIs.TextboxComponentUI;
+import componentUIs.HeaderComponentUI;
+import componentUIs.LeftModuleComponentUI;
 import core.BaseComponent;
-import core.BasePage;
 import org.openqa.selenium.WebDriver;
 import pageObjects.PageGenerator;
-import pageObjects.orangeHRM.EmployeeListPageObject;
 import pageUIs.orangHRM.DashboardPageUI;
 
 public class DashboardPO extends BaseComponent {
@@ -29,7 +28,22 @@ public class DashboardPO extends BaseComponent {
 
 
     public void openModuleByText(String moduleName) {
-        waitElementVisible(driver, TextboxComponentUI.MODULE_BY_TEXT,moduleName);
-        clickToElement(driver, TextboxComponentUI.MODULE_BY_TEXT,moduleName);
+        waitElementVisible(driver, LeftModuleComponentUI.LEFT_MODULE_BY_NAME,moduleName);
+        clickToElement(driver, LeftModuleComponentUI.LEFT_MODULE_BY_NAME,moduleName);
     }
+
+    //LiveCode-Component Pattern:OrangeHRM
+    public boolean isDashboardHeaderTextDisplayed(WebDriver driver) {
+        waitElementVisible(driver, HeaderComponentUI.HEADER_NAME,"Dashboard");
+        return isElementDisplayed(driver, HeaderComponentUI.HEADER_NAME,"Dashboard");
+    }
+
+    public EmployeeListPO openPIMModule() {
+        waitElementVisible(driver,LeftModuleComponentUI.LEFT_MODULE_BY_NAME,"PIM");
+        clickToElement(driver,LeftModuleComponentUI.LEFT_MODULE_BY_NAME,"PIM");
+        isLoadingIconDisappear(driver);
+        return PageGenerator.getPage(EmployeeListPO.class,driver);
+    }
+
+
 }

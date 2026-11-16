@@ -67,9 +67,9 @@ public class Level_11_Component_II extends BaseTest {
 //        employeeID =addEmployeePage.getEmployeeID();
 
         addEmployeePage.clickToAddDetailCheckbox();
-        addEmployeePage.enterToTextboxByLabel(createUsername,"Username");
-        addEmployeePage.enterToTextboxByLabel("Admin@12345","Password");
-        addEmployeePage.enterToTextboxByLabel("Admin@12345","Confirm Password");
+        addEmployeePage.enterToTextboxByLabelName(createUsername,"Username");
+        addEmployeePage.enterToTextboxByLabelName("Admin@12345","Password");
+        addEmployeePage.enterToTextboxByLabelName("Admin@12345","Confirm Password");
 
         personalDetailPage= addEmployeePage.clickToSaveButton();
 
